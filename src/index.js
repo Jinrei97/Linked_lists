@@ -71,6 +71,24 @@ class LinkedList {
       return this.pop(list.nextNode);
     }
   };
+
+  contains = (value, list = this.list) => {
+    if (list.value === value) return true;
+    if (!list.nextNode) return false;
+    return this.contains(value, list.nextNode);
+  };
+
+  find = (value, list = this.list) => {
+    let index = 0;
+    if (value === list.value) return index;
+    let next = list.nextNode;
+    while (next) {
+      index += 1;
+      if (value === next.value) return index;
+      next = next.nextNode;
+    }
+    return null;
+  };
 }
 
 const list = new LinkedList();
@@ -87,10 +105,24 @@ console.log(`head: [${list.head()}]`);
 console.log(`tail: [${list.tail()}]`);
 console.log(`at: [${list.at(5)}]`);
 console.log(`at: [${list.at(0)}]`);
+console.log(`contains: `, list.contains(8));
+console.log(`contains: `, list.contains(6));
+console.log(`contains: `, list.contains(4));
+console.log(`contains: `, list.contains(-2));
+console.log(`contains: `, list.contains(10));
+
+console.log(`find: `, list.find(8));
+console.log(`find: `, list.find(6));
+console.log(`find: `, list.find(4));
+console.log(`find: `, list.find(-2));
+console.log(`find: `, list.find(10));
+
+/*
 console.log(`pop: `, list.pop());
 console.log(`pop: `, list.pop());
 console.log(`pop: `, list.pop());
 console.log(`pop: `, list.pop());
 console.log(`pop: `, list.pop());
 console.log(`pop: `, list.pop());
+*/
 console.log(list.list);
