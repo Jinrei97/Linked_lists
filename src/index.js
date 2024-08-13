@@ -92,7 +92,7 @@ class LinkedList {
 
   toString = (list = this.list) => {
     if (!list.nextNode) {
-      return "null";
+      return `( ${list.value} ) => null`;
     } else {
       return `( ${list.value} ) => ` + this.toString(list.nextNode);
     }
@@ -120,6 +120,15 @@ class LinkedList {
       }
     }
     console.log(this.list);
+  };
+
+  removeAt = (index) => {
+    if (index < 0 || this.size() - 1 < index)
+      return "removeAt => invalid index";
+    let previous = this.at(index - 1);
+    let toRemove = this.at(index);
+    previous.nextNode = toRemove.nextNode;
+    return `Removed ${toRemove.value} at index ${index}`;
   };
 }
 
@@ -164,6 +173,20 @@ console.log(`tostring: `, list.toString());
 console.log(`insertAt: 10 size-1`, list.insertAt(10, list.size() - 1));
 console.log(`tostring: `, list.toString());
 console.log(`insertAt: 7 0`, list.insertAt(7, 0));
+console.log(`tostring: `, list.toString());
+
+console.log("\nREMOVE TESTS:");
+console.log(`removeAt: -1 => `, list.removeAt(-1));
+console.log(`tostring: `, list.toString());
+console.log(`removeAt: 5 => `, list.removeAt(5));
+console.log(`tostring: `, list.toString());
+console.log(`removeAt: size => `, list.removeAt(list.size()));
+console.log(`tostring: `, list.toString());
+console.log(`removeAt: size-1 => `, list.removeAt(list.size() - 1));
+console.log(`tostring: `, list.toString());
+console.log(`removeAt: 25 => `, list.removeAt(25));
+console.log(`tostring: `, list.toString());
+console.log(`removeAt: 2 => `, list.removeAt(2));
 console.log(`tostring: `, list.toString());
 /*
 console.log(`pop: `, list.pop());
