@@ -3,7 +3,7 @@ const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: "./src/index.js",
+    app: ["./src/main.js", "./src/linkedList.js"],
   },
   output: {
     filename: "[name].bundle.js",
