@@ -51,6 +51,26 @@ class LinkedList {
       return this.at(index - 1, list.nextNode);
     }
   };
+
+  pop = (list = this.list) => {
+    if (!list) {
+      console.log("empty list");
+      return null;
+    }
+    const first = list.nextNode;
+    if (!first) {
+      const element = list.value;
+      this.list = null;
+      return element;
+    }
+    const second = first.nextNode;
+    if (!second) {
+      list.nextNode = null;
+      return first;
+    } else {
+      return this.pop(list.nextNode);
+    }
+  };
 }
 
 const list = new LinkedList();
@@ -67,4 +87,10 @@ console.log(`head: [${list.head()}]`);
 console.log(`tail: [${list.tail()}]`);
 console.log(`at: [${list.at(5)}]`);
 console.log(`at: [${list.at(0)}]`);
-console.log(``);
+console.log(`pop: `, list.pop());
+console.log(`pop: `, list.pop());
+console.log(`pop: `, list.pop());
+console.log(`pop: `, list.pop());
+console.log(`pop: `, list.pop());
+console.log(`pop: `, list.pop());
+console.log(list.list);
