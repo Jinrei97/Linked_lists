@@ -23,7 +23,25 @@ class LinkedList {
     this.list = newNode;
   };
 
-  size = (value) => {};
+  size = () => {
+    let length = 1;
+    if (!this.list) return 0;
+    let currentNode = this.list.nextNode;
+    while (currentNode) {
+      length += 1;
+      currentNode = currentNode.nextNode;
+    }
+    return length;
+  };
+
+  head = () => {
+    if (!this.list) return null;
+    return this.list.value;
+  };
+  tail = (list = this.list) => {
+    if (!list.nextNode) return list.value;
+    return this.tail(list.nextNode);
+  };
 }
 
 const list = new LinkedList();
@@ -34,3 +52,7 @@ console.log(list.list);
 list.append(4);
 list.append(2);
 list.append(8);
+
+console.log(list.size());
+console.log(list.head());
+console.log(list.tail());
