@@ -44,7 +44,7 @@ class LinkedList {
   };
 
   at = (index, list = this.list) => {
-    if (index === 0) return list.value;
+    if (index === 0) return list;
     if (index < 0 || !list.nextNode) {
       alert("Invalid index");
     } else {
@@ -89,6 +89,38 @@ class LinkedList {
     }
     return null;
   };
+
+  toString = (list = this.list) => {
+    if (!list.nextNode) {
+      return "null";
+    } else {
+      return `( ${list.value} ) => ` + this.toString(list.nextNode);
+    }
+  };
+
+  insertAt = (value, index) => {
+    if (this.size() - 1 < index || index < 0) {
+      return "insertAt => invalid index";
+    }
+    let searchIndex = 0;
+    if (index === searchIndex) {
+      this.prepend(value);
+      return "insertAt => prepend";
+    }
+    let next = this.list.nextNode;
+    while (next) {
+      searchIndex += 1;
+      if (index === searchIndex) {
+        const newNode = new Node(value, next);
+        next = null;
+        this.at(index - 1).nextNode = newNode;
+        return `inserted ${value} at ${index}`;
+      } else {
+        next = next.nextNode;
+      }
+    }
+    console.log(this.list);
+  };
 }
 
 const list = new LinkedList();
@@ -117,6 +149,22 @@ console.log(`find: `, list.find(4));
 console.log(`find: `, list.find(-2));
 console.log(`find: `, list.find(10));
 
+console.log(`tostring: `, list.toString());
+
+console.log(`insertAt: -2 3`, list.insertAt(-2, 3));
+console.log(`tostring: `, list.toString());
+console.log(`insertAt: 10 1`, list.insertAt(10, 1));
+console.log(`tostring: `, list.toString());
+console.log(`insertAt: 10 -1`, list.insertAt(10, -1));
+console.log(`tostring: `, list.toString());
+console.log(`insertAt: 10 size`, list.insertAt(10, list.size()));
+console.log(`tostring: `, list.toString());
+console.log(`insertAt: 10 size+1`, list.insertAt(10, list.size() + 1));
+console.log(`tostring: `, list.toString());
+console.log(`insertAt: 10 size-1`, list.insertAt(10, list.size() - 1));
+console.log(`tostring: `, list.toString());
+console.log(`insertAt: 7 0`, list.insertAt(7, 0));
+console.log(`tostring: `, list.toString());
 /*
 console.log(`pop: `, list.pop());
 console.log(`pop: `, list.pop());
