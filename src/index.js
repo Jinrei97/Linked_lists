@@ -42,6 +42,15 @@ class LinkedList {
     if (!list.nextNode) return list.value;
     return this.tail(list.nextNode);
   };
+
+  at = (index, list = this.list) => {
+    if (index === 0) return list.value;
+    if (index < 0 || !list.nextNode) {
+      alert("Invalid index");
+    } else {
+      return this.at(index - 1, list.nextNode);
+    }
+  };
 }
 
 const list = new LinkedList();
@@ -53,6 +62,9 @@ list.append(4);
 list.append(2);
 list.append(8);
 
-console.log(list.size());
-console.log(list.head());
-console.log(list.tail());
+console.log(`size: [${list.size()}]`);
+console.log(`head: [${list.head()}]`);
+console.log(`tail: [${list.tail()}]`);
+console.log(`at: [${list.at(5)}]`);
+console.log(`at: [${list.at(0)}]`);
+console.log(``);
